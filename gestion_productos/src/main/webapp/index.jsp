@@ -9,15 +9,22 @@
     <body>
         <h1>Ingrese datos del producto</h1>
 
-        <form action="GestorProductos" method="POST">
+        <% String error=(String) request.getAttribute("error"); %>
+            <% if (error !=null) { %>
+                <p style="color: red;">
+                    <%= error %>
+                </p>
+                <% } %>
 
-            <p>Nombre: <input type="text" name="nombre"></p>
-            <p>Precio: <input type="text" name="precio"></p>
-            <p>Categoria: <input type="text" name="categoria"></p>
-            <p>Cantidad de producto: <input type="text" name="cantidad"></p>
+                    <form action="GestorProductos" method="POST">
 
-            <button type="submit">Enviar producto</button>
-        </form>
+                        <p>Nombre: <input type="text" name="nombre"></p>
+                        <p>Precio: <input type="text" name="precio"></p>
+                        <p>Categoria: <input type="text" name="categoria"></p>
+                        <p>Cantidad de producto: <input type="text" name="cantidad"></p>
+
+                        <button type="submit">Enviar producto</button>
+                    </form>
     </body>
 
     </html>

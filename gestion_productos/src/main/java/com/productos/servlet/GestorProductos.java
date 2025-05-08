@@ -50,9 +50,18 @@ public class GestorProductos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nombre = req.getParameter("nombre");
-        double precio = Double.parseDouble(req.getParameter("precio"));
+        double precio;
         String categoria = req.getParameter("categoria");
-        int cantidad = Integer.parseInt(req.getParameter("cantidad"));
+        int cantidad;
+
+        try {
+            precio = Double.parseDouble(req.getParameter("precio"));
+            cantidad = Integer.parseInt(req.getParameter("cantidad"));
+        } catch (NumberFormatException e) {
+            req.setAttribute("error", "Ingrese un número válido para precio y cantidad.");
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+            return; // Evita continuar con datos incorrectos
+        }
 
         // Si el producto existe pero queremos agregar una nueva cantidad, usamos el iterador para ello
         boolean existe = false;
