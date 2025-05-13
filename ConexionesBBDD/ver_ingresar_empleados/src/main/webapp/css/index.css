@@ -1,0 +1,68 @@
+/* Establece una fuente de tipo sans-serif para todo el documento */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8; /* Fondo suave */
+  color: #333; /* Texto oscuro para mejor legibilidad */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Centra todo el contenido en la página */
+h1 {
+  text-align: center;
+  color: #4caf50; /* Color verde para el encabezado */
+  margin-top: 50px;
+}
+
+/* Contenedor principal para el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* Estilo para los botones */
+input[type="submit"] {
+  background-color: #007bff; /* Color azul para los botones */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+/* Efecto de hover para los botones */
+input[type="submit"]:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+  transform: translateY(
+    -3px
+  ); /* Eleva ligeramente el botón al pasar el cursor */
+}
+
+/* Efecto de enfoque en los botones */
+input[type="submit"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.7); /* Resalta el botón cuando está enfocado */
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  form {
+    margin-top: 30px;
+  }
+
+  input[type="submit"] {
+    width: 80%;
+    font-size: 14px;
+  }
+}

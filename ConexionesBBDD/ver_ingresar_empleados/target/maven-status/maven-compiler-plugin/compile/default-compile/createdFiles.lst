@@ -1,0 +1,6 @@
+com\emple2\JAXRSConfiguration.class
+com\emple2\filter\CorsFilter.class
+com\emple2\controller\IngresarEmpleado.class
+com\emple2\servlet\Direccionamiento.class
+com\emple2\resource\SampleResource.class
+com\emple2\model\Empleado.class
