@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.calcular_nota.filter;
+package com.emple2.filter;
 
 import java.io.IOException;
 import jakarta.ws.rs.container.ContainerRequestContext;

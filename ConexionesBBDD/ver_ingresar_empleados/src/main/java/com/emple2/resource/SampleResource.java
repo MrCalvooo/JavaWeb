@@ -1,4 +1,4 @@
-package com.calcular_nota.resource;
+package com.emple2.resource;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
