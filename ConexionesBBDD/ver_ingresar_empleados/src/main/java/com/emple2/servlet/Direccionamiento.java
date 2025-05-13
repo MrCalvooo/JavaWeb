@@ -26,13 +26,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "Direccionamiento", value = "/Direccionamiento")
 public class Direccionamiento extends HttpServlet {
 
-    private String message;
-
-    @Override
-    public void init() {
-        message = "Hello World from Servlet!";
-    }
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int opcion = Integer.parseInt(request.getParameter("opcion"));
@@ -46,6 +39,7 @@ public class Direccionamiento extends HttpServlet {
             case 3:
                 break;
             case 4:
+                request.getRequestDispatcher("WEB-INF/views/consultarEmpleadoDatos.jsp").forward(request, response);
                 break;
             case 5:
                 break;

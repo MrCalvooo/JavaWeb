@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "IngresarEmpleado", value = "/IngresarEmpleado")
 public class IngresarEmpleado extends HttpServlet {
 
+    // Direccion de la base de datos
     private final String url = "jdbc:sqlite:D:/Usuarios/calvo/Desktop/DAM/JavaWeb/ConexionesBBDD/scriptsBBDD/empleados.db";
     String mensaje;
 
@@ -52,7 +53,7 @@ public class IngresarEmpleado extends HttpServlet {
                                 ingreso.setString(4, apellido2);
                                 ingreso.setInt(5, cod_departamento);
 
-                                // Insetamos la insercion y obtenemos las filas ingresadas
+                                // Insertamos la insercion y obtenemos las filas ingresadas
                                 int filasInsertadas = ingreso.executeUpdate();
                                 if (filasInsertadas > 0) {
                                     mensaje = "Empleado insertado correctamente";
