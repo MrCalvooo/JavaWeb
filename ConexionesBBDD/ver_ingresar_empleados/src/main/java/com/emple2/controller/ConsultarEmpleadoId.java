@@ -19,29 +19,31 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ConsultarEmpleadoId extends HttpServlet {
 
     private final String url = "jdbc:sqlite:D:/Usuarios/calvo/Desktop/DAM/JavaWeb/ConexionesBBDD/scriptsBBDD/empleados.db";
-    String mensaje;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
 
             // Cargamos el driver
-            Class.forName("org:sqlite.JDBC");
+            Class.forName("org.sqlite.JDBC");
 
             // Conectamos a la BBDD
             try (Connection con = DriverManager.getConnection(url)) {
+                // Preparamos la consulta
                 try (PreparedStatement consulta = con.prepareStatement("select * from empleados where nombre = ? and apellido1 = ? and apellido2 = ?")) {
+                    // Almacenamos los datos del formulario para la consulta
                     String nombre = req.getParameter("nombre");
                     String apellido1 = req.getParameter("apellido1");
                     String apellido2 = req.getParameter("apellido2");
 
+                    // Asignamos los valores a la consulta
                     consulta.setString(1, nombre);
                     consulta.setString(2, apellido1);
                     consulta.setString(3, apellido2);
 
+                    // Ejecutamos la consulta
                     try (ResultSet rs = consulta.executeQuery()) {
                         if (rs.next()) {
-                            int codigo = rs.getInt("codigo");
                             String nif = rs.getString("nif");
                             nombre = rs.getString("nombre");
                             apellido1 = rs.getString("apellido1");
@@ -54,19 +56,19 @@ public class ConsultarEmpleadoId extends HttpServlet {
                             req.getRequestDispatcher("/WEB-INF/views/empleados.jsp").forward(req, resp);
                         }
                     } catch (SQLException e) {
-                        req.setAttribute(mensaje, "Empleado no encontrado");
+                        req.setAttribute("mensaje", "Empleado no encontrado");
                         req.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(req, resp);
                     }
                 } catch (SQLException e) {
-                    req.setAttribute(mensaje, "Error al consultar el empleado");
+                    req.setAttribute("mensaje", "Error al consultar el empleado");
                     req.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(req, resp);
                 }
             } catch (SQLException e) {
-                req.setAttribute(mensaje, "Error al conectar a la base de datos");
+                req.setAttribute("mensaje", "Error al conectar a la base de datos");
                 req.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(req, resp);
             }
         } catch (ClassNotFoundException e) {
-            req.setAttribute(mensaje, "Error al cargar el driver");
+            req.setAttribute("mensaje", "Error al cargar el driver");
             req.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(req, resp);
         }
     }

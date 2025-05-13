@@ -1,0 +1,98 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  margin: 0;
+}
+
+/* Main container */
+h1 {
+  font-size: 2rem;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+/* Form container */
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+/* Labels */
+label {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Inputs */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus effect on inputs */
+input[type="text"]:focus {
+  border-color: #4caf50;
+}
+
+/* Submit button */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for button */
+button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  form {
+    padding: 20px;
+    width: 90%;
+  }
+  input[type="text"] {
+    font-size: 1rem;
+  }
+  button {
+    font-size: 1rem;
+  }
+}
