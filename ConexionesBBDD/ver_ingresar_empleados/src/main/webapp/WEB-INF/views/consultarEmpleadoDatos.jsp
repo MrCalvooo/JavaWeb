@@ -9,7 +9,25 @@
     </head>
 
     <body>
+        <h1>Datos del empleado</h1>
 
+        <form action="ConsultarEmpleadoId" method="post">
+
+            <label for="Nombre">Nombre empleado: </label>
+            <input type="text" name="nombre" required>
+            <br>
+
+            <label for="Nombre">Primer apellido del empleado: </label>
+            <input type="text" name="apellido1" required>
+            <br>
+
+            <label for="Nombre">Segundo apellido del empleado: </label>
+            <input type="text" name="apellido2" required>
+            <br>
+
+            <button type="submit">Consultar</button>
+
+        </form>
     </body>
 
     </html>
