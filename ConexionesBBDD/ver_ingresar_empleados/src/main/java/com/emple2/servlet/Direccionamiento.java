@@ -42,6 +42,7 @@ public class Direccionamiento extends HttpServlet {
                 request.getRequestDispatcher("WEB-INF/views/consultarEmpleadoDatos.jsp").forward(request, response);
                 break;
             case 5:
+                request.getRequestDispatcher("WEB-INF/views/consultarEmpleados.jsp").forward(request, response);
                 break;
             default:
                 request.getRequestDispatcher("index.jsp").forward(request, response);
