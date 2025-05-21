@@ -119,6 +119,8 @@ public class HelloServlet extends HttpServlet {
         // debes controlar aquí si quieres enviar algo a otro .jsp
         // y el .forward al .jsp que corresponda
 
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+
     }
 
 }
