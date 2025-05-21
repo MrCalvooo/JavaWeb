@@ -31,15 +31,16 @@
                     <label for="idU">Identificador Usuario:</label>
                     <!--en value debes poner el id del usuario que habrás podido obtener en el servlet al iniciar sesión-->
                     <!--este id no puedes perderlo porque determina cualquier consulta a la base de datos-->
-                    <input type="text" id="usuario" name="usuario" readonly value=IDUSUARIO />
-                    <label for="categoria">Número categoría:</label>
-                    <input type="text" id="categoria" name="categoria" />
-                    <label for="titulo">Título:</label>
-                    <input type="text" id="titulo" name="titulo" />
-                    <label for="descripcion">Descripción:</label>
-                    <input type="text" id="descripcion" name="descripcion" />
+                    <%int id=(int) request.getAttribute("id");%>
+                        <input type="text" id="usuario" name="usuario" readonly value="<%= id%>" />
+                        <label for="categoria">Número categoría:</label>
+                        <input type="text" id="categoria" name="categoria" />
+                        <label for="titulo">Título:</label>
+                        <input type="text" id="titulo" name="titulo" />
+                        <label for="descripcion">Descripción:</label>
+                        <input type="text" id="descripcion" name="descripcion" />
 
-                    <input type="submit" value="Insertar Tarea" />
+                        <input type="submit" value="Insertar Tarea" />
                 </form>
                 <form action="opcionesL" method="post">
                     <input type="hidden" name="opcion" value="eliminar" />
