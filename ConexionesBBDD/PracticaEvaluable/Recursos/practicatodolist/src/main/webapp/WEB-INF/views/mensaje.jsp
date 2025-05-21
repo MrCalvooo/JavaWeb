@@ -15,12 +15,8 @@
             <h1>RESULTADO DE LA OPERACIÓN</h1>
             <h2><a href=<!--a dónde me envía el enlace--><!--el texto será volver a inicio o volver a opciones--></a></h2>
             <div class="mensaje">
-                
-                <%String mensaje = (String) request.getAttribute("mensaje");
-                if(user.equals("") || pass.equals("")){
-                %>
+                <%String mensaje = (String) request.getAttribute("mensaje");%>
                 <h2><%=mensaje %></h2>
-            <%}%>
             </div>
         </div>
     </body>

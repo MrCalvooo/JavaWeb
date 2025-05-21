@@ -31,95 +31,94 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
 
-	private final String url = "jdbc:sqlite:/home/alumnom/Escritorio/a/Recursos/tareas.db";
-	private String mensaje = "";
+    private final String url = "jdbc:sqlite:D:\\Usuarios\\calvo\\Desktop\\DAM\\JavaWeb\\ConexionesBBDD\\PracticaEvaluable\\Recursos\\tareas.db";
+    private String mensaje = "";
 
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		try {
-			// Intentamos cargar los driver para conectar a la BBDD
-			Class.forName("org.sqlite.JDBC");
+        try {
+            // Intentamos cargar los driver para conectar a la BBDD
+            Class.forName("org.sqlite.JDBC");
 
-			// Intentamos conectar a la BBDD
-			try (Connection connection = DriverManager.getConnection(url)) {
-				System.out.println("Conectado a la BBDD");
-				// Preparamos la consulta
-				try (PreparedStatement consulta = connection
-						.prepareStatement(
-								"select nombre_usuario, password from usuarios where nombre_usuario = ? and password = ?")) {
+            // Intentamos conectar a la BBDD
+            try (Connection connection = DriverManager.getConnection(url)) {
+                System.out.println("Conectado a la BBDD");
+                // Preparamos la consulta
+                try (PreparedStatement consulta = connection
+                        .prepareStatement(
+                                "select nombre_usuario, password from usuarios where nombre_usuario = ? and password = ?")) {
 
-					String user = request.getParameter("usuario");
-					String pass = request.getParameter("pass");
+                    String user = request.getParameter("usuario");
+                    String pass = request.getParameter("pass");
 
-					consulta.setString(1, user);
-					consulta.setString(2, pass);
+                    consulta.setString(1, user);
+                    consulta.setString(2, pass);
 
-					System.out.println("Ps preparado");
-					// Ejecutamos la query
-					try (ResultSet rs = consulta.executeQuery()) {
-						if (rs.next()) {
-							String user_rs = rs.getString("nombre_usuario");
-							String pass_rs = rs.getString("password");
+                    System.out.println("Ps preparado");
+                    // Ejecutamos la query
+                    try (ResultSet rs = consulta.executeQuery()) {
+                        if (rs.next()) {
+                            String user_rs = rs.getString("nombre_usuario");
+                            String pass_rs = rs.getString("password");
 
-							if (!user.equals(pass_rs) || !pass.equals(pass_rs)) {
-								System.out.println("DATOS INCORRECTOS");
-								mensaje = "USUARIO O CONTRASEÑA INCORRECTOS";
-								request.setAttribute("mensaje", mensaje);
-								request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
-							} else {
-								System.out.println("Consulta realizada");
+                            System.out.println("Consulta realizada");
 
-								request.setAttribute("user", user);
-								request.setAttribute("pass", pass);
+                            request.setAttribute("user", user);
+                            request.setAttribute("pass", pass);
 
-								System.out.println("User: " + user);
-								System.out.println("Password: " + pass);
+                            System.out.println("User: " + user);
+                            System.out.println("Password: " + pass);
 
-								request.getRequestDispatcher("/WEB-INF/views/opciones.jsp").forward(request, response);
-							}
-						}
+                            request.getRequestDispatcher("/WEB-INF/views/opciones.jsp").forward(request, response);
+                        } else {
+                            // No hay resultados: usuario o contraseña incorrectos
+                            System.out.println("DATOS INCORRECTOS (no hay resultados)");
+                            mensaje = "USUARIO O CONTRASEÑA INCORRECTOS";
+                            request.setAttribute("mensaje", mensaje);
+                            request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
+                        }
 
-					} catch (Exception e) {
-						System.out.println("No retorna datos");
-						mensaje = "USUARIO NO ENCONTRADO";
-						request.setAttribute("mensaje", mensaje);
-						request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
-					}
+                    } catch (Exception e) {
+                        System.out.println("No retorna datos");
+                        mensaje = "USUARIO NO ENCONTRADO";
+                        request.setAttribute("mensaje", mensaje);
+                        request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
+                    }
 
-				} catch (SQLException e) {
-					System.out.println("No realiza consulta");
-					mensaje = "No se pudo preparar la consulta";
-					request.setAttribute("mensaje", mensaje);
-					request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
-				}
+                } catch (SQLException e) {
+                    System.out.println("No realiza consulta");
+                    mensaje = "No se pudo preparar la consulta";
+                    request.setAttribute("mensaje", mensaje);
+                    request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
+                }
 
-			} catch (SQLException e) {
-				System.out.println("No conecta BBDD");
-				mensaje = "Error al conectar a la BBDD";
-				request.setAttribute("mensaje", mensaje);
-				request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
-			}
-		} catch (ClassNotFoundException e) {
-			System.out.println("No carga driver");
-			mensaje = "Error al cargar el driver de la base de datos";
-			request.setAttribute("mensaje", mensaje);
-			request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
-		}
+            } catch (SQLException e) {
+                System.out.println("No conecta BBDD");
+                mensaje = "Error al conectar a la BBDD";
+                request.setAttribute("mensaje", mensaje);
+                request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
+            }
+        } catch (ClassNotFoundException e) {
+            System.out.println("No carga driver");
+            mensaje = "Error al cargar el driver de la base de datos";
+            request.setAttribute("mensaje", mensaje);
+            request.getRequestDispatcher("/WEB-INF/views/mensaje.jsp").forward(request, response);
+        }
 
-	}
+    }
 
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		// los .jsp incluidos en /WEB-INF/views no son visibles desde el navegador por
-		// cuestiones de seguridad
-		// el servidor Tomcat no permite el acceso directo a ellos
-		// por eso, si queremos redirigir desde esos.jsp, tendremos que hacerlo pasando
-		// por el Servlet
-		// esas redirecciones el Servlet las gestiona desde el método doGet
-		// debes controlar aquí si quieres enviar algo a otro .jsp
-		// y el .forward al .jsp que corresponda
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        // los .jsp incluidos en /WEB-INF/views no son visibles desde el navegador por
+        // cuestiones de seguridad
+        // el servidor Tomcat no permite el acceso directo a ellos
+        // por eso, si queremos redirigir desde esos.jsp, tendremos que hacerlo pasando
+        // por el Servlet
+        // esas redirecciones el Servlet las gestiona desde el método doGet
+        // debes controlar aquí si quieres enviar algo a otro .jsp
+        // y el .forward al .jsp que corresponda
 
-	}
+    }
 
 }
