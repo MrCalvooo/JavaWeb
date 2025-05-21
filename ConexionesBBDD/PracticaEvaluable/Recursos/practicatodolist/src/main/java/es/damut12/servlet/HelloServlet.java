@@ -59,8 +59,8 @@ public class HelloServlet extends HttpServlet {
                     // Ejecutamos la query
                     try (ResultSet rs = consulta.executeQuery()) {
                         if (rs.next()) {
-                            String user_rs = rs.getString("nombre_usuario");
-                            String pass_rs = rs.getString("password");
+                            user = rs.getString("nombre_usuario");
+                            pass = rs.getString("password");
 
                             System.out.println("Consulta realizada");
 
