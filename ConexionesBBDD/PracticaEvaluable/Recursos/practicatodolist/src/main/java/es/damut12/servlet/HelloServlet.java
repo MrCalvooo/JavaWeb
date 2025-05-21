@@ -47,7 +47,7 @@ public class HelloServlet extends HttpServlet {
                 // Preparamos la consulta
                 try (PreparedStatement consulta = connection
                         .prepareStatement(
-                                "select nombre_usuario, password from usuarios where nombre_usuario = ? and password = ?")) {
+                                "select nombre_usuario, password, id from usuarios where nombre_usuario = ? and password = ?")) {
 
                     String user = request.getParameter("usuario");
                     String pass = request.getParameter("pass");
@@ -61,14 +61,18 @@ public class HelloServlet extends HttpServlet {
                         if (rs.next()) {
                             user = rs.getString("nombre_usuario");
                             pass = rs.getString("password");
+							int id = rs.getInt("id");
 
                             System.out.println("Consulta realizada");
 
                             request.setAttribute("user", user);
                             request.setAttribute("pass", pass);
+							request.setAttribute("id", id);
+
 
                             System.out.println("User: " + user);
                             System.out.println("Password: " + pass);
+							System.out.println("ID: " + id);
 
                             request.getRequestDispatcher("/WEB-INF/views/opciones.jsp").forward(request, response);
                         } else {
